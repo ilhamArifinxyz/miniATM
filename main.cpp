@@ -225,3 +225,29 @@ void tambahSaldo(int indexAkun)
         cout << "Saldo baru Anda: Rp " << g_semuaAkunBank[indexAkun].saldo << endl;
     }
 }
+
+void tarikSaldo(int indexAkun)
+{
+    cout << "\n--- TARIK SALDO ---" << endl;
+    double jumlah;
+    cout << "Masukkan jumlah yang ingin ditarik: Rp ";
+    cin >> jumlah;
+
+    if (jumlah <= 0)
+    {
+        cout << "Jumlah tidak valid." << endl;
+    }
+    else if (jumlah > g_semuaAkunBank[indexAkun].saldo)
+    {
+        cout << "Saldo tidak mencukupi." << endl;
+        cout << "Saldo Anda saat ini: Rp " << formatRibuan(g_semuaAkunBank[indexAkun].saldo) << endl;
+    }
+    else
+    {
+        g_semuaAkunBank[indexAkun].saldo -= jumlah;
+        tambahHistory(indexAkun, "Tarik Tunai", -jumlah);
+
+        cout << "Tarik tunai berhasil." << endl;
+        cout << "Saldo sisa Anda: Rp " << g_semuaAkunBank[indexAkun].saldo << endl;
+    }
+}
