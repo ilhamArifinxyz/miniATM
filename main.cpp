@@ -30,3 +30,36 @@ void tambahSaldo(int indexAkun);
 void tarikSaldo(int indexAkun);
 void transfer(int indexAkunPengirim);
 void cekHistory(int indexAkun);
+
+void pause()
+{
+    char lanjut;
+    cout << "\nKetik huruf apapun lalu Enter untuk melanjutkan: ";
+    cin >> lanjut;
+}
+
+int main()
+{
+    inisialisasiAkun();
+
+    while (true)
+    {
+        cout << "\n\n*************************************" << endl;
+        cout << "==   SELAMAT DATANG DI ATM MINI    ==" << endl;
+        cout << "*************************************" << endl;
+
+        int indexAkunAktif = login();
+
+        if (indexAkunAktif != -1)
+        {
+            tampilkanMenu(indexAkunAktif);
+        }
+        else
+        {
+            cout << "Terima kasih telah menggunakan ATM kami." << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
