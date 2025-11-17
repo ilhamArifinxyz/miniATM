@@ -251,3 +251,51 @@ void tarikSaldo(int indexAkun)
         cout << "Saldo sisa Anda: Rp " << g_semuaAkunBank[indexAkun].saldo << endl;
     }
 }
+
+void transfer(int indexAkunPengirim)
+{
+    cout << "\n--- TRANSFER ANTAR AKUN ---" << endl;
+    string noRekTujuan;
+    double jumlah;
+
+    cout << "Masukkan Nomor Rekening Tujuan: ";
+    cin >> noRekTujuan;
+
+    int indexAkunPenerima = cariAkun(noRekTujuan);
+
+    if (indexAkunPenerima == -1)
+    {
+        cout << "Nomor Rekening Tujuan tidak ditemukan." << endl;
+    }
+    else if (indexAkunPenerima == indexAkunPengirim)
+    {
+        cout << "Anda tidak dapat transfer ke rekening Anda sendiri." << endl;
+    }
+    else
+    {
+        cout << "Anda akan transfer ke: " << g_semuaAkunBank[indexAkunPenerima].nama << endl;
+        cout << "Masukkan jumlah transfer: Rp ";
+        cin >> jumlah;
+
+        if (jumlah <= 0)
+        {
+            cout << "Jumlah tidak valid." << endl;
+        }
+        else if (jumlah > g_semuaAkunBank[indexAkunPengirim].saldo)
+        {
+            cout << "Saldo tidak mencukupi untuk melakukan transfer." << endl;
+        }
+        else
+        {
+            g_semuaAkunBank[indexAkunPengirim].saldo -= jumlah;
+            g_semuaAkunBank[indexAkunPenerima].saldo += jumlah;
+
+            tambahHistory(indexAkunPengirim, "Transfer ke " + g_semuaAkunBank[indexAkunPenerima].nama, -jumlah);
+            tambahHistory(indexAkunPenerima, "Transfer dari " + g_semuaAkunBank[indexAkunPengirim].nama, jumlah);
+
+            cout << "Transfer berhasil." << endl;
+            cout << "Saldo baru Anda: Rp " << g_semuaAkunBank[indexAkunPengirim].saldo << endl;
+        }
+    }
+}
+
