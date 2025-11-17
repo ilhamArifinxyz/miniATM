@@ -197,3 +197,31 @@ void tampilkanMenu(int indexAkun)
         }
     }
 }
+
+void cekSaldo(int indexAkun)
+{
+    cout << "\n--- CEK SALDO ---" << endl;
+
+    cout << "Saldo Anda saat ini adalah: Rp " << formatRibuan(g_semuaAkunBank[indexAkun].saldo) << endl;
+}
+
+void tambahSaldo(int indexAkun)
+{
+    cout << "\n--- TAMBAH SALDO (SETOR TUNAI) ---" << endl;
+    double jumlah;
+    cout << "Masukkan jumlah yang ingin disetor: Rp ";
+    cin >> jumlah;
+
+    if (jumlah <= 0)
+    {
+        cout << "Jumlah tidak valid." << endl;
+    }
+    else
+    {
+        g_semuaAkunBank[indexAkun].saldo += jumlah;
+        tambahHistory(indexAkun, "Setor Tunai", jumlah);
+
+        cout << "Setor tunai berhasil." << endl;
+        cout << "Saldo baru Anda: Rp " << g_semuaAkunBank[indexAkun].saldo << endl;
+    }
+}
