@@ -130,3 +130,70 @@ int login()
     pause();
     return -1;
 }
+
+int cariAkun(string nomorRekening)
+{
+    for (int i = 0; i < g_semuaAkunBank.size(); i++)
+    {
+        if (g_semuaAkunBank[i].nomorRekening == nomorRekening)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void tampilkanMenu(int indexAkun)
+{
+    int pilihan = 0;
+
+    while (pilihan != 6)
+    {
+        cout << "\n\n*************************************" << endl;
+        cout << "==           MENU UTAMA ATM          ==" << endl;
+        cout << "*************************************" << endl;
+
+        cout << "Halo, " << g_semuaAkunBank[indexAkun].nama << endl;
+        cout << "Rekening: " << g_semuaAkunBank[indexAkun].nomorRekening << endl;
+        cout << "-------------------------------------" << endl;
+        cout << "1. Cek Saldo" << endl;
+        cout << "2. Tarik Saldo" << endl;
+        cout << "3. Tambah Saldo (Setor Tunai)" << endl;
+        cout << "4. Transfer" << endl;
+        cout << "5. Cek History Transaksi" << endl;
+        cout << "6. Logout" << endl;
+        cout << "-------------------------------------" << endl;
+        cout << "Masukkan pilihan Anda (1-6): ";
+        cin >> pilihan;
+
+        switch (pilihan)
+        {
+        case 1:
+            cekSaldo(indexAkun);
+            break;
+        case 2:
+            tarikSaldo(indexAkun);
+            break;
+        case 3:
+            tambahSaldo(indexAkun);
+            break;
+        case 4:
+            transfer(indexAkun);
+            break;
+        case 5:
+            cekHistory(indexAkun);
+            break;
+        case 6:
+            cout << "\nLogout berhasil. Terima kasih." << endl;
+            break;
+        default:
+            cout << "\nPilihan tidak valid. Silakan coba lagi." << endl;
+            break;
+        }
+
+        if (pilihan != 6)
+        {
+            pause();
+        }
+    }
+}
