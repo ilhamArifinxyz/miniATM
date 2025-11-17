@@ -299,3 +299,32 @@ void transfer(int indexAkunPengirim)
     }
 }
 
+void cekHistory(int indexAkun)
+{
+    cout << "\n--- HISTORY TRANSAKSI ---" << endl;
+    Akun akun = g_semuaAkunBank[indexAkun];
+
+    cout << "Rekening: " << akun.nomorRekening << " (" << akun.nama << ")" << endl;
+    cout << "------------------------------------------" << endl;
+
+    if (akun.history.empty())
+    {
+        cout << "Belum ada riwayat transaksi." << endl;
+    }
+    else
+    {
+        for (Transaksi trx : akun.history)
+        {
+            cout << "Deskripsi: " << trx.deskripsi << endl;
+            if (trx.jumlah > 0)
+            {
+                cout << "  (Masuk)  : +Rp " << trx.jumlah << endl;
+            }
+            else
+            {
+                cout << "  (Keluar) : -Rp " << -trx.jumlah << endl;
+            }
+            cout << "------------------------------------------" << endl;
+        }
+    }
+}
